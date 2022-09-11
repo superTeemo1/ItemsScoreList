@@ -1,0 +1,32 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.btn-cnt{
+    padding-bottom:50px;
+    padding-top:30px;
+}
+.submit{
+    padding-left:50px;
+}
+.p15{
+    padding-left:15px;
+    padding-right:15px;
+}
+.main{
+    width:50%;
+}

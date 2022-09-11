@@ -1,0 +1,86 @@
+﻿@model GRMTestApp.ViewModel.ItemsVM
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Scoreboard</h1>
+
+<div class="container">
+    <table class="table table-sm table-striped main">
+    <thead>
+        <tr>
+            <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Position)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.Items[0].Name)
+
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items[0].Score)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @{
+                int i = 0;
+                
+            }
+@foreach (var item in Model.Items) {
+                i++;
+                <tr>
+            <td>
+                @Html.DisplayFor(modelItem => i)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <div class="container-fluid btn-cnt">
+        <a asp-action="Next" id="openForm" class="btn btn-danger">Go match</a>
+    </div>
+       
+   <div class="container-fluid">
+        @using (Html.BeginForm("AddScore", "Items", FormMethod.Post))
+        {
+            for(int j = 0; j< Model.Matches.Count; j++){
+                @Html.HiddenFor(m=> m.Matches[j].Name); 
+                @Html.HiddenFor(id => id.Matches[j].ItemID);
+                @Html.HiddenFor(position => position.Matches[j].Position);
+                @Html.HiddenFor(score => score.Matches[j].Score);
+               
+                <div class="input-group input-group-sm mb-3">
+                    <div class="col-md-2">
+                        <span class="input-group-text left" id="inputGroup-sizing-sm"> @Html.DisplayFor(name => name.Matches[j].Name,  new { @class = "left" })</span>
+                    </div>
+                    <div class="col-md-1 p15">
+                        @Html.TextBoxFor(value => value.Matches[j].Value, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(value => value.Matches[j].Value)
+                    </div>
+                    </div>
+            }
+            <button type="submit" id="submit" class="btn btn-outline-secondary">Match</button>
+        }
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        //var formElements = document.getElementsByTagName("form");
+        //for (var i = 0; i < formElements.length; i++){
+        //    formElements[i].id = "pair" + i;
+        //}
+
+        //document.getElementById("openForm").addEventListener("click", myFunction);
+        //function myFunction() {
+        //    document.getElementById("pair0").style.display = 'block';
+        //}
+    </script>
+}
